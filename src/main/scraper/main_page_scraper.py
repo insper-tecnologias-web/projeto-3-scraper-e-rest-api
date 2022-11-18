@@ -1,6 +1,7 @@
 from .scraper import Scraper
 from .data import Data
 
+import re
 import requests
 import bs4
 from bs4 import BeautifulSoup
@@ -17,7 +18,7 @@ class MainPageScraper(Scraper):
         self.data = Data()
 
     # ===== Private instance methods
-    def _find_table(self) -> bs4.element.tag | bs4.element.NavigableString:
+    def _find_table(self):
         soup = self._soup_response()
         table = soup.find('table', class_='collection_table').find('tbody')
         return table
@@ -29,37 +30,36 @@ class MainPageScraper(Scraper):
         return rows
 
     # ----- Table row data
-    def _bgg_rank(self, row: bs4.element.tag | bs4.element.NavigableString) -> bs4.element.tag | bs4.element.NavigableString:
+    def _bgg_rank(self, row):
         bgg_rank = row.find('td', class_='collection_rank').text
         self.data.BGG_RANK = bgg_rank
-        return bgg_rank
 
-    def _boardgame_name(self, row: bs4.element.tag | bs4.element.NavigableString) -> bs4.element.tag | bs4.element.NavigableString:
+    def _boardgame_name(self, row):
         boardgame_name = row.find('a', class_='primary').text
         self.data.BOARDGAME_NAME = boardgame_name
-        return boardgame_name
 
-    def _boardgame_year(self, row: bs4.element.tag | bs4.element.NavigableString) -> bs4.element.tag | bs4.element.NavigableString:
-        boardgame_year = row.find('span', class_='smallerfont dull').text
+    def _boardgame_year(self, row):
+        boardgame_year = row.find('span', class_='smallerfont dull').text[1:-1]
         self.data.BOARDGAME_YEAR = boardgame_year
-        return boardgame_year
 
-    def _bgg_rating(self, row: bs4.element.tag | bs4.element.NavigableString) -> bs4.element.tag | bs4.element.NavigableString:
+    def _three_rating_data(self, row):
+        three_rating_data = row.find_all('td', class_='collection_bggrating')
+        self.data.BGG_RATING = three_rating_data[0].text
+        self.data.AVG_RATING = three_rating_data[1].text
+        self.data.NUM_VOTERS = three_rating_data[2].text
 
-        pass
-
-    def _avg_rating(self, row: bs4.element.tag | bs4.element.NavigableString) -> bs4.element.tag | bs4.element.NavigableString:
-
-        pass
-
-    def _num_voters(self, row: bs4.element.tag | bs4.element.NavigableString) -> bs4.element.tag | bs4.element.NavigableString:
-
-        pass
-
-    def _amazon_price(self, row: bs4.element.tag | bs4.element.NavigableString) -> bs4.element.tag | bs4.element.NavigableString:
-
-        pass
+    def _amazon_price(self, row):
+        amazon_price = row.find('a', class_='ulprice').find(
+            'span', class_='positive').text[1:]
+        self.data.AMAZON_PRICE = amazon_price
     # ----- End table row data
+
+    def _handle_table_row_data(self, row):
+        self._bgg_rank(row)
+        self._boardgame_name(row)
+        self._boardgame_year(row)
+        self._three_rating_data(row)
+        self._amazon_price(row)
 
     def _soup_response(self) -> BeautifulSoup:
         url_with_page = ''.join(tuple(self.URL, self.page))
@@ -74,6 +74,7 @@ class MainPageScraper(Scraper):
 
         rows = self._find_rows()
         for row in rows:
+            self._handle_table_row_data(row)
             data_dict = self.data.make_dict()
 
             scraped_data.append(data_dict)
