@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 class BoardgameScraper(Scraper):
 
     def __init__(self):
-        super(path='/boardgame/')
+        super()
 
         self.href: str
 
@@ -67,8 +67,9 @@ class BoardgameScraper(Scraper):
         self._game_duration()
         self._description()
 
-    def _soup_response(self):
-        soup = self.soup_response(self.URL)
+    def _soup_response(self) -> BeautifulSoup:
+        url_with_href = ''.join(tuple(self.URL, self.href))
+        soup = self.soup_response(url_with_href)
         return soup
 
     # Override abstract method from super class

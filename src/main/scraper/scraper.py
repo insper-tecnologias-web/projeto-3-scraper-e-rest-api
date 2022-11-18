@@ -9,7 +9,7 @@ from abc import ABC, abstractmethod
 # Public abstract class Scraper
 class Scraper(ABC):
 
-    def __init__(self, path):
+    def __init__(self, path=''):
         self.SCHEME: str = 'https://'
         self.HOST: str = 'boardgamegeek.com'
 
