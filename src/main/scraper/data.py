@@ -1,14 +1,24 @@
-class Data:
+from abc import ABC, abstractmethod
+
+
+class Data(ABC):
+    @abstractmethod
+    def make_dict(self) -> dict:
+        pass
+
+
+class MainData(Data):
 
     def __init__(self):
-        self.BGG_RANK = ''
-        self.BOARDGAME_NAME = ''
-        self.BOARDGAME_YEAR = ''
-        self.BGG_RATING = ''
-        self.AVG_RATING = ''
-        self.NUM_VOTERS = ''
-        self.AMAZON_PRICE = ''
+        self.BGG_RANK: str
+        self.BOARDGAME_NAME: str
+        self.BOARDGAME_YEAR: str
+        self.BGG_RATING: str
+        self.AVG_RATING: str
+        self.NUM_VOTERS: str
+        self.AMAZON_PRICE: str
 
+    # Override abstract method from superclass
     def make_dict(self) -> dict:
         data_dict = {
             'bgg_rank': self.BGG_RANK,
@@ -18,5 +28,22 @@ class Data:
             'avg_rating': self.AVG_RATING,
             'num_voters': self.NUM_VOTERS,
             'amazon_price': self.AMAZON_PRICE
+        }
+        return data_dict
+
+
+class BoardgameData(Data):
+
+    def __init__(self):
+        self.NUMBER_OF_PLAYERS: str
+        self.GAME_DURATION: str
+        self.DESCRIPTION: str
+
+    # Override abstract method from superclass
+    def make_dict(self) -> dict:
+        data_dict = {
+            'number_of_players': self.NUMBER_OF_PLAYERS,
+            'game_duration': self.GAME_DURATION,
+            'description': self.DESCRIPTION
         }
         return data_dict

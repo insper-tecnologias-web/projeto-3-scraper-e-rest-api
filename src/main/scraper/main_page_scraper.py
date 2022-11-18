@@ -1,7 +1,6 @@
 from .scraper import Scraper
-from .data import Data
+from .data import MainData
 
-import re
 import requests
 import bs4
 from bs4 import BeautifulSoup
@@ -11,23 +10,37 @@ class MainPageScraper(Scraper):
 
     def __init__(self):
         super(path='/browse/boardgame/page/')
+        self.href_list: list
 
         self.page = 1
         self.URL = self.generate_URL()
 
-        self.data = Data()
+        self.data = MainData()
 
     # ===== Private instance methods
+    # def _next_page(self):
+    #     self.page += 1
+    #     self.URL = self.generate_URL()
+
+    # def _previous_page(self):
+    #     self.page -= 1
+    #     self.URL = self.generate_URL()
+
     def _find_table(self):
         soup = self._soup_response()
         table = soup.find('table', class_='collection_table').find('tbody')
         return table
 
-    # Find rows of the table
     def _find_rows(self) -> list:
         table = self._find_table()
         rows = table.find_all('tr', id='row')
         return rows
+
+    def _find_hrefs(self):
+        rows = self._find_rows()
+        for row in rows:
+            href = row.find('a', class_='primary', href=True)['href']
+            self.hrefs_list.append(href)
 
     # ----- Table row data
     def _bgg_rank(self, row):
@@ -63,13 +76,11 @@ class MainPageScraper(Scraper):
 
     def _soup_response(self) -> BeautifulSoup:
         url_with_page = ''.join(tuple(self.URL, self.page))
-        response = requests.get(url_with_page, headers=self.headers)
-        response.encoding = 'utf-8'
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = self.soup_response(url_with_page)
         return soup
 
     # Override abstract method from super class
-    def scrap(self) -> None:
+    def scrap(self) -> list:
         scraped_data: list
 
         rows = self._find_rows()
@@ -78,3 +89,4 @@ class MainPageScraper(Scraper):
             data_dict = self.data.make_dict()
 
             scraped_data.append(data_dict)
+        return scraped_data

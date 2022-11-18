@@ -6,7 +6,7 @@ from fake_useragent import UserAgent
 from abc import ABC, abstractmethod
 
 
-# Abstract class Scraper
+# Public abstract class Scraper
 class Scraper(ABC):
 
     def __init__(self, path):
@@ -18,18 +18,15 @@ class Scraper(ABC):
         self.ua = UserAgent()
         self.headers = {'user-agent': self._ua.random}
 
-    def _navigate_to_boardgame_page(self, boardgame_path):
-        pass
-
     def generate_URL(self):
         url = ''.join(tuple(self.SCHEME, self.HOST, self.path))
         return url
 
-    def get_tag_a(self):
-        pass
-
-    def get_href_from_a(self, htmlTag_a):
-        pass
+    def soup_response(self, url):
+        response = requests.get(url, headers=self.headers)
+        response.encoding = 'utf-8'
+        soup = BeautifulSoup(response.text, 'html.parser')
+        return soup
 
     @abstractmethod
     def scrap(self):
