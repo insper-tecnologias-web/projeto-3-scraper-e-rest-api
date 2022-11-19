@@ -26,6 +26,12 @@ class MainPageScraper(Scraper):
     #     self.page -= 1
     #     self.URL = self.generate_URL()
 
+    def _find_hrefs(self):
+        rows = self._find_rows()
+        for row in rows:
+            href = row.find('a', class_='primary', href=True)['href']
+            self.hrefs_list.append(href)
+
     def _find_table(self):
         soup = self._soup_response()
         table = soup.find('table', class_='collection_table').find('tbody')
@@ -36,13 +42,6 @@ class MainPageScraper(Scraper):
         rows = table.find_all('tr', id='row')
         return rows
 
-    def _find_hrefs(self):
-        rows = self._find_rows()
-        for row in rows:
-            href = row.find('a', class_='primary', href=True)['href']
-            self.hrefs_list.append(href)
-
-    # ----- Table row data
     def _bgg_rank(self, row):
         bgg_rank = row.find('td', class_='collection_rank').text
         self.data.BGG_RANK = bgg_rank
@@ -65,7 +64,6 @@ class MainPageScraper(Scraper):
         amazon_price = row.find('a', class_='ulprice').find(
             'span', class_='positive').text[1:]
         self.data.AMAZON_PRICE = amazon_price
-    # ----- End table row data
 
     def _handle_table_row_data(self, row):
         self._bgg_rank(row)

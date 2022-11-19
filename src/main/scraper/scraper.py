@@ -6,7 +6,6 @@ from fake_useragent import UserAgent
 from abc import ABC, abstractmethod
 
 
-# Public abstract class Scraper
 class Scraper(ABC):
 
     def __init__(self, path=''):

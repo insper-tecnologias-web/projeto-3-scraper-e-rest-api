@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
 
+# TODO
+# Faz sentido ter essa super classe?
 class Data(ABC):
     @abstractmethod
     def make_dict(self) -> dict:
