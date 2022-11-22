@@ -3,6 +3,9 @@
 - Vinícius Matheus Morales
 - Pedro Cliquet do Amaral
 - Lincoln Rodrigo Pereira Melo
+
+#### Projeto
+  <div aling="center">Desenvolveu-se uma interface web interativa utilizando serviços de API-RESTful, seguindos os padrões em rotas, crawler/scrappe, o CRUD em Django e ter essa aplicação publicada na internet. O tema da interface será sobre jogos de tabuleiros, com intuito de faicilitar a busca deles, utilizando novas ferramentas e características para que o usuário tenha melhor desempenho ao procura-los.</div>
 ___
 
 1. Criar ambiente virtual
