@@ -2,7 +2,7 @@
 ## API:
 
 
-  O Django irá auxiliar para o tratamento de dados contendo as seguintes informações salvas em um banco de dados interno como END points, e retorna-os em um .JSON:
+  <div aling="center" >O Django irá auxiliar para o tratamento de dados contendo as seguintes informações salvas em um banco de dados interno como END points, e retorna-os em um .JSON:</div>
   
   | Endpoint | Descrição | 
   |-----------|:-----------:|
@@ -36,9 +36,9 @@
 | player | Quantidade de jogadores | integer |
 | time | Duração média de uma partida | integer |
 | price | Preço do jogo(se disponível) | float |
-| geek rating | Categoria de 0 a 10 | float |
-| avg | Categoria de 0 a 10 | float |
-| numvotes | Quantidade de pessoas que votaram | integer |
+| geek_rating | Categoria de 0 a 10 | float |
+| avg_rating | Categoria de 0 a 10 | float |
+| num_votes | Quantidade de pessoas que votaram |integer |
 | year | Ano de criação | integer |
 | descrip | Descrição do jogo | string |
 
