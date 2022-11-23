@@ -19,7 +19,7 @@ class MainPageScraper(Scraper):
         self.data = MainData()
         self.json_dir = Path(__file__).parent.cwd()/'src'/'data'/'data.json'
 
-    # ===== Private instance methods
+    # ===== Private methods
     def __get_rows(self):
         table = self.__get_table()
         rows = table.find_all('tr', {'id': 'row_'})
@@ -79,7 +79,8 @@ class MainPageScraper(Scraper):
         soup = self.soup_response(url_with_page)
         return soup
 
-    def __write_on_json(self):
+    # ===== Public methods
+    def write_on_json(self):
         self.scraped_data = json.dumps(self.scraped_data, indent=4)
         with open(self.json_dir, 'w') as json_file:
             json_file.write(self.scraped_data)
@@ -90,4 +91,3 @@ class MainPageScraper(Scraper):
             self.__handle_table_row_data(row)
             data_dict = self.data.make_dict()
             self.scraped_data.append(data_dict)
-        self.__write_on_json()
