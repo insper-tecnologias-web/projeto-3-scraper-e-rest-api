@@ -1,31 +1,19 @@
-from abc import ABC, abstractmethod
-
-
-# TODO
-# Faz sentido ter essa super classe?
-class Data(ABC):
-    @abstractmethod
-    def make_dict(self) -> dict:
-        pass
-
-
-class MainData(Data):
+class MainData:
 
     def __init__(self):
-        self.BGG_RANK: str
-        self.BOARDGAME_NAME: str
-        self.BOARDGAME_YEAR: str
-        self.BGG_RATING: str
-        self.AVG_RATING: str
-        self.NUM_VOTERS: str
-        self.AMAZON_PRICE: str
+        self.RANK: int = None
+        self.NAME: str = None
+        self.YEAR: int = None
+        self.BGG_RATING: float = None
+        self.AVG_RATING: float = None
+        self.NUM_VOTERS: int = None
+        self.AMAZON_PRICE: float = None
 
-    # Override abstract method from superclass
     def make_dict(self) -> dict:
         data_dict = {
-            'bgg_rank': self.BGG_RANK,
-            'boardgame_name': self.BOARDGAME_NAME,
-            'boardgame_year': self.BOARDGAME_YEAR,
+            'rank': self.RANK,
+            'name': self.NAME,
+            'year': self.YEAR,
             'bgg_rating': self.BGG_RATING,
             'avg_rating': self.AVG_RATING,
             'num_voters': self.NUM_VOTERS,
@@ -34,14 +22,13 @@ class MainData(Data):
         return data_dict
 
 
-class BoardgameData(Data):
+class BoardgameData:
 
     def __init__(self):
         self.NUMBER_OF_PLAYERS: str
         self.GAME_DURATION: str
         self.DESCRIPTION: str
 
-    # Override abstract method from superclass
     def make_dict(self) -> dict:
         data_dict = {
             'number_of_players': self.NUMBER_OF_PLAYERS,
