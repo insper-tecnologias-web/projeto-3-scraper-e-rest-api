@@ -11,15 +11,18 @@ class MainPageScraper(Scraper):
 
     def __init__(self):
         super().__init__()
+        self.page = 1
         self.path = '/browse/boardgame/page/'
         self.href_list = []
         self.scraped_data = []
-        self.page = 1
         self.URL = self.generate_URL()
         self.data = MainData()
         self.json_dir = Path(__file__).parent.cwd()/'src'/'data'/'data.json'
 
-    # ===== Private methods
+    def __next_page(self):
+        self.page += 1
+        self.URL = self.generate_URL()
+
     def __get_rows(self):
         table = self.__get_table()
         rows = table.find_all('tr', {'id': 'row_'})
@@ -41,7 +44,7 @@ class MainPageScraper(Scraper):
 
     def __get_hrefs(self, row):
         href = row.find('a', {'class': 'primary'}, href=True)['href']
-        self.hrefs_list.append(href)
+        self.href_list.append(href)
 
     def __attribute_bgg_rank_to_data(self, row):
         bgg_rank = row.find('td', {'class': 'collection_rank'}).text
@@ -53,10 +56,13 @@ class MainPageScraper(Scraper):
         self.data.NAME = boardgame_name
 
     def __attribute_boardgame_year_to_data(self, row):
-        boardgame_year = row.find(
-            'span', {'class': 'smallerfont dull'}).text[1:-1]
-        boardgame_year = int(boardgame_year)
-        self.data.YEAR = boardgame_year
+        try:
+            boardgame_year = row.find(
+                'span', {'class': 'smallerfont dull'}).text[1:-1]
+            boardgame_year = int(boardgame_year)
+            self.data.YEAR = boardgame_year
+        except:
+            pass
 
     def __attribute_three_rating_types_data_to_data(self, row):
         three_rating_data = row.find_all(
@@ -79,15 +85,29 @@ class MainPageScraper(Scraper):
         soup = self.soup_response(url_with_page)
         return soup
 
-    # ===== Public methods
+    def __handle_rows(self):
+        rows = self.__get_rows()
+        for row in rows:
+            self.__handle_table_row_data(row)
+            data_dict = self.data.make_dict()
+            self.scraped_data.append(data_dict)
+
     def write_on_json(self):
         self.scraped_data = json.dumps(self.scraped_data, indent=4)
         with open(self.json_dir, 'w') as json_file:
             json_file.write(self.scraped_data)
 
     def scrap(self):
-        rows = self.__get_rows()
-        for row in rows:
-            self.__handle_table_row_data(row)
-            data_dict = self.data.make_dict()
-            self.scraped_data.append(data_dict)
+        while True:
+            try:
+                print(self.page)
+                self.__handle_rows()
+                self.__next_page()
+            except:
+                break
+
+
+if __name__ == '__main__':
+    scraper = MainPageScraper()
+    scraper.scrap()
+    scraper.write_on_json()
