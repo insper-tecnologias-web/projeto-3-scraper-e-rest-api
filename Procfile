@@ -1,2 +1,2 @@
-release: python manage.py migrate $$ python manage.py loaddata data.json
+release: python manage.py migrate && python manage.py loaddata data.json
 web: gunicorn gameboardapi.wsgi
