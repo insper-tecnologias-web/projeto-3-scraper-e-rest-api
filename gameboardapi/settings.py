@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'boardgames.apps.BoardgamesConfig'
+    'boardgames.apps.BoardgamesConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -40,7 +40,7 @@ class MainPageScraper(Scraper):
         self.__attribute_boardgame_name_to_data(row)
         self.__attribute_boardgame_year_to_data(row)
         self.__attribute_three_rating_types_data_to_data(row)
-        self.__attribute_amazon_price_to_data(row)
+        # self.__attribute_amazon_price_to_data(row)
 
     def __get_hrefs(self, row):
         href = row.find('a', {'class': 'primary'}, href=True)['href']
@@ -71,14 +71,14 @@ class MainPageScraper(Scraper):
         self.data.AVG_RATING = float(three_rating_data[1].text)
         self.data.NUM_VOTERS = int(three_rating_data[2].text)
 
-    def __attribute_amazon_price_to_data(self, row):
-        try:
-            amazon_price = row.find('td', {'class': 'collection_shop'}).find(
-                'span', {'class': 'positive'}).text[1:]
-            amazon_price = float(amazon_price)
-            self.data.AMAZON_PRICE = amazon_price
-        except:
-            pass
+    # def __attribute_amazon_price_to_data(self, row):
+    #     try:
+    #         amazon_price = row.find('td', {'class': 'collection_shop'}).find(
+    #             'span', {'class': 'positive'}).text[1:]
+    #         amazon_price = (amazon_price)
+    #         # self.data.AMAZON_PRICE = amazon_price
+    #     except:
+    #         pass
 
     def __soup_response(self) -> BeautifulSoup:
         url_with_page = ''.join((self.URL, str(self.page)))

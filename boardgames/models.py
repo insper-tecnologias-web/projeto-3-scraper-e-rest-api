@@ -10,6 +10,15 @@ class Game(models.Model):
     rank = models.IntegerField()
     # id = models.BigAutoField(primary_key=True)
 
+    
     def __str__ (self):
         string = self.name
+        # teste =  {
+        #     "rank": self.rank,
+        #     "name":  self.name,
+        #     "year": self.year,
+        #     "geek_rating": self.geek_rating,
+        #     "avg_rating": self.avg_rating,
+        #     "num_voters": self.num_voters
+        # }
         return string

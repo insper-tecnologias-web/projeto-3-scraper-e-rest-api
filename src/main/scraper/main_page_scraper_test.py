@@ -49,11 +49,11 @@ class TestBeforeScrape(unittest.TestCase):
         self.assertEqual(NUM_VOTERS_from_object,
                          NUM_VOTERS_expected, 'NUM_VOTERS não está nulo')
 
-    def test_AMAZON_PRICE_data_before_scrape(self):
-        AMAZON_PRICE_from_object = self.Scraper.data.AMAZON_PRICE
-        AMAZON_PRICE_expected = None
-        self.assertEqual(AMAZON_PRICE_from_object,
-                         AMAZON_PRICE_expected, 'AMAZON_PRICE não está nulo')
+    # def test_AMAZON_PRICE_data_before_scrape(self):
+    #     AMAZON_PRICE_from_object = self.Scraper.data.AMAZON_PRICE
+    #     AMAZON_PRICE_expected = None
+    #     self.assertEqual(AMAZON_PRICE_from_object,
+    #                      AMAZON_PRICE_expected, 'AMAZON_PRICE não está nulo')
 
 
 # class Test(unittest.TestCase):

@@ -7,17 +7,18 @@ class MainData:
         self.BGG_RATING: float = None
         self.AVG_RATING: float = None
         self.NUM_VOTERS: int = None
-        self.AMAZON_PRICE: float = None
 
     def make_dict(self) -> dict:
         data_dict = {
-            'rank': self.RANK,
+            "model" : "boardgames.game",
+            "pk" : self.RANK,
+            "fields": {'rank': self.RANK,
             'name': self.NAME,
             'year': self.YEAR,
-            'bgg_rating': self.BGG_RATING,
+            'geek_rating': self.BGG_RATING,
             'avg_rating': self.AVG_RATING,
-            'num_voters': self.NUM_VOTERS,
-            'amazon_price': self.AMAZON_PRICE
+            'num_voters': self.NUM_VOTERS,        
+            }
         }
         return data_dict
 
