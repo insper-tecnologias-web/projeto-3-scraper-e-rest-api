@@ -42,7 +42,7 @@ def api_random(request): #APENAS LAYOUT MONTADO
     return Response(serialized_game)
 
 @api_view(['GET'])
-def api_category(request): #APENAS LAYOUT MONTADO
+def api_index(request): #APENAS LAYOUT MONTADO
     try:
         game = Game.objects.all()
     except game.DoesNotExist:
