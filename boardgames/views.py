@@ -65,7 +65,7 @@ def api_index(request):
         game = Game.objects.all()
     except game.DoesNotExist:
         raise Http404()
-    serialized_game = GameSerializer(game)
+    serialized_game = GameSerializer(game, many=True)
     return Response(serialized_game)
 
 @api_view(['GET'])
