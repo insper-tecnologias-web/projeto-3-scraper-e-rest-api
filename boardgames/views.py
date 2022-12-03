@@ -66,6 +66,7 @@ def api_index(request):
         game = Game.objects.all()
     except game.DoesNotExist:
         raise Http404()
+
     serialized_game = GameSerializer(game)
     return render(request, 'boardgames/index.html')
 
