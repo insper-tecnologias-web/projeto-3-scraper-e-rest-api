@@ -6,6 +6,7 @@ from .models import Game
 from .serializers import GameSerializer
 import random
 
+
 # Create your views here.
 @api_view(['GET']) #/rank
 def api_rank(request):
@@ -65,8 +66,9 @@ def api_index(request):
         game = Game.objects.all()
     except game.DoesNotExist:
         raise Http404()
-    serialized_game = GameSerializer(game, many=True)
-    return Response(serialized_game.data)
+
+    serialized_game = GameSerializer(game)
+    return render(request, 'boardgames/index.html')
 
 @api_view(['GET'])
 def api_year(request,year):
