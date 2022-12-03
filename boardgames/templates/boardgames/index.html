@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>API Board Games</title>
+    <style>
+        table {
+        border-collapse: collapse;
+        width: 100%;
+        }
+
+        th, td {
+        text-align: left;
+        padding: 8px;
+        }
+
+        tr:nth-child(even) {background-color: #f2f2f2;}
+
+        .doc{
+            text-align: left;
+            padding: 8px;
+        }
+        .t2{
+            padding: 20px;
+        }
+        .ex{
+            padding: 20px;
+
+        }
+    </style>
+
+  <body >
+    <div class = 'doc'>Documentação:</div>
+    <div class ='t2'> 
+        <table>
+            <tr> 
+                <td>Endpoint</td>
+                <td>Descrição</td>
+            </tr>
+            <tr> 
+                <td>rank</td>
+                <td> Jogos listados 
+                    pela avaliação de jogadores</td>
+            </tr>
+            <tr> 
+                <td>name</td>
+                <td>Nome completo do jogo, no caso de busca na API é necessário o nome por completo para encontrar as informações</td>
+            </tr>
+            <tr> 
+                <td>year</td>
+                <td>Ano de fabricação</td>
+            </tr>
+            <tr> 
+                <td>random</td>
+                <td>Escolhe um jogo aleatório</td>
+            </tr>
+
+        </table>
+    </div>
+    <div>
+        <ul>
+            <li>Ranqueamento, o usuário poderá filtrar os jogos de acordo 
+                com a avaliação de outros jogadores.</li>
+            <li>
+                Ranqueamento/Posição na classificação(número inteiro), irá apresentar o jogo que possuí 
+                a posição do número inteiro no ranque.
+            </li>
+            <li>
+                Nome, filtra os jogos pelo nome completo
+            </li>
+        
+            <li>
+                Ano, filtra os jogos pelo ano de criação.
+            </li>
+        
+            <li>
+                Random, irá entregar 
+                um jogo aleatório para o usuário.
+            </li>
+        
+        
+        </ul>
+    </div>
+    <div class ='t2'>No caso do acesso aos itens no JSON, os dados serão apresentados dessa forma:</div>
+    <div class="t2">
+        <table >
+            <tr>
+                <td>Informação</td>
+                <td> Drescição</td>
+                <td>Tipo</td>
+            </tr>
+            <tr>
+                <td>rank</td>
+                <td> Ranque do jogo</td>
+                <td>Integer</td>
+            </tr>
+
+            <tr>
+                <td>id</td>
+                <td> Número de identificação</td>
+                <td>Integer</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td> Nome completo do jogo</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>geek_rating</td>
+                <td> Caregoria de 0 a 10</td>
+                <td>Float</td>
+            </tr>
+            <tr>
+                <td>avg_rating</td>
+                <td> Caregoria de 0 a 10</td>
+                <td>Float</td>
+            </tr>
+            <tr>
+                <td>num_votes</td>
+                <td> Quantidade de pessoas que votaram</td>
+                <td>Integer</td>
+            </tr>
+            <tr>
+                <td>year</td>
+                <td> Ano de criação</td>
+                <td>Integer</td>
+            </tr>
+
+        </table>
+
+    </div>
+    <div class="t2">
+        Exemplos de uso:
+    </div>
+    <div class ='ex'>
+        <div>
+            "/rank" - devolve a API do primeiro colocado em diante.
+        </div>
+        <div>
+            "/rank/1" - devolve o primeiro colocado, o número pós a barra devolverá o jogo de ranque igual ao número.
+        </div>
+        <div>
+            "/name/Monopoly" - busca jogos pelo nome COMPLETO.
+        </div>
+        <div>
+            "/year/1980" - devolve todos os jogos criados naquele ano.
+        </div>
+        <div>
+            "/random" - devolve um jogo aleatório.
+        </div>
+    </div>
+  </body>
+</html>
