@@ -38,4 +38,24 @@ Com o ambiente virtual rodando:
 ```bash
 pip install -r requirements.txt
 ```
+
+4. Rodar o scraper
+Feito tudo mencionado anteriormente, rode:
+```bash
+python3 main_page_scraper.py
+```
+ou
+```bash
+python main_page_scraper.py
+```
+
+E você verá os resultados num arquivo no root chamado "data.json".
+
+Pronto! Agora você rodou o scraper principal :-)
+
+Os dados coletados podem ser vistos nesse arquivo ".json" que são os seguintes:
+
+rank, name, year, geek_rating, avg_rating, num_voters.
+
+Os dados coletados pelo scraper são armazenados no nosso banco de dados e acessamos com nossa REST API.
 ___
