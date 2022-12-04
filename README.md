@@ -59,3 +59,7 @@ rank, name, year, geek_rating, avg_rating, num_voters.
 
 Os dados coletados pelo scraper são armazenados no nosso banco de dados e acessamos com nossa REST API.
 ___
+
+
+
+Link Base da api no deploy: https://web-production-0673.up.railway.app/
