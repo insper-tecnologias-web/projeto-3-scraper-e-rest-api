@@ -10,15 +10,16 @@ class MainData:
 
     def make_dict(self) -> dict:
         data_dict = {
-            "model" : "boardgames.game",
-            "pk" : self.RANK,
-            "fields": {'rank': self.RANK,
-            'name': self.NAME,
-            'year': self.YEAR,
-            'geek_rating': self.BGG_RATING,
-            'avg_rating': self.AVG_RATING,
-            'num_voters': self.NUM_VOTERS,        
-            }
+            "model": "boardgames.game",
+            "pk": self.RANK,
+            "fields": {
+                "rank": self.RANK,
+                "name": self.NAME,
+                "year": self.YEAR,
+                "geek_rating": self.BGG_RATING,
+                "avg_rating": self.AVG_RATING,
+                "num_voters": self.NUM_VOTERS,
+            },
         }
         return data_dict
 
@@ -32,8 +33,8 @@ class BoardgameData:
 
     def make_dict(self) -> dict:
         data_dict = {
-            'number_of_players': self.NUMBER_OF_PLAYERS,
-            'game_duration': self.GAME_DURATION,
-            'description': self.DESCRIPTION
+            "number_of_players": self.NUMBER_OF_PLAYERS,
+            "game_duration": self.GAME_DURATION,
+            "description": self.DESCRIPTION,
         }
         return data_dict

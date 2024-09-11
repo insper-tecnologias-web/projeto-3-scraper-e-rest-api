@@ -6,10 +6,10 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         fields = [
-            'name',
-            'year',
-            'geek_rating',
-            'avg_rating',
-            'num_voters',
-            'rank' ]
-
+            "name",
+            "year",
+            "geek_rating",
+            "avg_rating",
+            "num_voters",
+            "rank",
+        ]
