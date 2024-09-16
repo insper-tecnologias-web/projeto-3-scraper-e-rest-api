@@ -48,7 +48,9 @@ def api_name(request, name):
 
 @api_view(["GET"])
 def api_name_erro(request):
-    string = "É necessário colocar o um /nome, então a endpoint correta é: /name/<str:name>"
+    string = (
+        "É necessário colocar o um /nome, então a endpoint correta é: /name/<str:name>"
+    )
     return Response(string)
 
 
@@ -70,7 +72,6 @@ def api_index(request):
     except game.DoesNotExist:
         raise Http404()
 
-    serialized_game = GameSerializer(game)
     return render(request, "boardgames/index.html")
 
 
@@ -82,4 +83,3 @@ def api_year(request, year):
         raise Http404()
     serialized_game = GameSerializer(game, many=True)
     return Response(serialized_game.data)
-

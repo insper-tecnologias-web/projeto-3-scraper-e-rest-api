@@ -11,4 +11,3 @@ urlpatterns = [
     path("random", views.api_random, name="random"),
     path("year/<int:year>", views.api_year, name="year"),
 ]
-

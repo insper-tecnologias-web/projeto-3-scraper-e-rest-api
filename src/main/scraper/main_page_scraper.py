@@ -17,9 +17,7 @@ class MainPageScraper(Scraper):
         self.scraped_data = []
         self.URL = self.generate_URL()
         self.data = MainData()
-        self.json_dir = (
-            Path(__file__).parent.cwd() / "src" / "data" / "data.json"
-        )
+        self.json_dir = Path(__file__).parent.cwd() / "src" / "data" / "data.json"
 
     def __next_page(self):
         self.page += 1
@@ -60,18 +58,14 @@ class MainPageScraper(Scraper):
 
     def __attribute_boardgame_year_to_data(self, row):
         try:
-            boardgame_year = row.find(
-                "span", {"class": "smallerfont dull"}
-            ).text[1:-1]
+            boardgame_year = row.find("span", {"class": "smallerfont dull"}).text[1:-1]
             boardgame_year = int(boardgame_year)
             self.data.YEAR = boardgame_year
-        except:
+        except Exception:
             pass
 
     def __attribute_three_rating_types_data_to_data(self, row):
-        three_rating_data = row.find_all(
-            "td", {"class": "collection_bggrating"}
-        )
+        three_rating_data = row.find_all("td", {"class": "collection_bggrating"})
         self.data.BGG_RATING = float(three_rating_data[0].text)
         self.data.AVG_RATING = float(three_rating_data[1].text)
         self.data.NUM_VOTERS = int(three_rating_data[2].text)
@@ -108,7 +102,7 @@ class MainPageScraper(Scraper):
                 print(self.page)
                 self.__handle_rows()
                 self.__next_page()
-            except:
+            except Exception:
                 break
 
 

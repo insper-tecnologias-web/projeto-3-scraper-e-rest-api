@@ -14,4 +14,3 @@ class Game(models.Model):
     def __str__(self):
         string = self.name
         return string
-
