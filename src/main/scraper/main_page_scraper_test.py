@@ -10,9 +10,7 @@ class TestBeforeScrape(unittest.TestCase):
     def test_url(self):
         url_from_object = self.Scraper.URL
         url_expected = "https://boardgamegeek.com/browse/boardgame/page/1"
-        self.assertEqual(
-            url_from_object, url_expected, "A URL gerada está incorreta"
-        )
+        self.assertEqual(url_from_object, url_expected, "A URL gerada está incorreta")
 
     def test_RANK_data_before_scrape(self):
         RANK_from_object = self.Scraper.data.RANK
