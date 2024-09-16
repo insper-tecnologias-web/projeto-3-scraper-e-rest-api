@@ -16,6 +16,6 @@ jobs:
         pip install flake8 pylint black
     - name: Run linting
       run: |
-        flake8 .
-        pylint <your_project_folder>
+        flake8 src
+        pylint src
         black --check .
